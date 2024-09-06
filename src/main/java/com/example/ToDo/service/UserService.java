@@ -19,9 +19,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //get All User
     public List<UserDTO> getAllUser() {
@@ -45,7 +44,7 @@ public class UserService {
 
         User user = new User();
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user = userRepository.save(user);
 
         return convertToDTO(user);
@@ -73,7 +72,7 @@ public class UserService {
                 .orElseThrow(() -> new InvalidUserDataException("User not found with ID: " + id));
 
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user = userRepository.save(user);
 
         return convertToDTO(user);

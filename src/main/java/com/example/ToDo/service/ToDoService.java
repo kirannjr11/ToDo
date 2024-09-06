@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ToDoService {
-
     @Autowired
     private TodoRepository todoRepository;
 
@@ -38,6 +37,7 @@ public class ToDoService {
         return todoDTOList;
     }
 
+    //create
     public TodoDTO createTodo(TodoDTO todoDTO) {
         if (todoDTO == null ||
                 todoDTO.getTitle() == null || todoDTO.getTitle().trim().isEmpty() ||
@@ -65,6 +65,7 @@ public class ToDoService {
         return convertToDTO(todo);
     }
 
+    //get by id
     public TodoDTO getTodoById(Long id) {
         if (id == null) {
             throw new InvalidUserDataException("Todo ID cannot be null");
@@ -77,7 +78,8 @@ public class ToDoService {
     }
 
 
-    @Transactional
+    //update
+    @Transactional  //for data consistency
     public TodoDTO updateTodo(Long id, TodoDTO todoDTO) {
         if (todoDTO == null ||
                 todoDTO.getTitle() == null || todoDTO.getTitle().trim().isEmpty() ||
@@ -106,7 +108,9 @@ public class ToDoService {
         return convertToDTO(todo);
     }
 
-    @Transactional
+
+    //delete
+    @Transactional //for data consistency
     public void deleteTodo(Long id) {
         if (id == null) {
             throw new InvalidUserDataException("Todo ID cannot be null");
@@ -120,6 +124,7 @@ public class ToDoService {
     }
 
 
+    //get by priority
     public List<TodoDTO> getTodosByPriority(Priority priority) {
         List<Todo> todos = todoRepository.findByPriority(priority);
         List<TodoDTO> todoDTOList = new ArrayList<>();
@@ -132,6 +137,8 @@ public class ToDoService {
         return todoDTOList;
     }
 
+
+   // get by Status
     public List<TodoDTO> getTodosByStatus(Status status) {
         List<Todo> todos = todoRepository.findByStatus(status);
         List<TodoDTO> todoDTOList = new ArrayList<>();
