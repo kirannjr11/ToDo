@@ -3,6 +3,7 @@ package com.example.ToDo.controller;
 import com.example.ToDo.dto.UserDTO;
 import com.example.ToDo.exception.InvalidUserDataException;
 import com.example.ToDo.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     @Autowired

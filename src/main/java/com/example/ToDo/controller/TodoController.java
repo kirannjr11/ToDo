@@ -6,6 +6,7 @@ import com.example.ToDo.dto.TodoDTO;
 import com.example.ToDo.exception.InvalidUserDataException;
 import com.example.ToDo.repository.TodoRepository;
 import com.example.ToDo.service.ToDoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
+@SecurityRequirement(name = "bearerAuth")
 public class TodoController {
 
     @Autowired

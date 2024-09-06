@@ -51,23 +51,6 @@ public class AuthController {
         return new ResponseEntity<>(jwtResponse, HttpStatus.CREATED);
     }
 
-    // Login endpoint
-    @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest jwtRequest) {
-        // Authenticate the user
-        authenticate(jwtRequest.getName(), jwtRequest.getPassword());
-
-        // Load the user details after successful authentication
-        UserDetails userDetails = userDetailsService.loadUserByUsername(jwtRequest.getName());
-
-        // Generate JWT token
-        String token = jwtHelper.generateToken(userDetails);
-
-        // Create response with JWT token and username
-        JwtResponse jwtResponse = new JwtResponse(token, userDetails.getUsername());
-        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
-    }
-
     // Helper method for authenticating the user
     private void authenticate(String username, String password) {
         try {
