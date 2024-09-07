@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "todo")
+@Table(name = "todos")
 public class Todo {
 
     @Id
